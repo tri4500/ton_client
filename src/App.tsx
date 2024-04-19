@@ -57,13 +57,18 @@ function App() {
     const handleFunc = async () => {
       if (verifySignatureBody) {
         try {
-          console.log("GOOOOOOOOOOO");
-          const res = await axios({
-            method: "POST",
-            url: "http://localhost:8085/verify",
-            data: verifySignatureBody,
-          });
-          console.log("call verify: ", res);
+          console.log("verifySignatureBody: ", verifySignatureBody);
+          // console.log("GOOOOOOOOOOO");
+          // const res = await axios({
+          //   method: "POST",
+          //   url: "https://dev-api.memetd.game/v1/telegram/connect-wallet",
+          //   data: verifySignatureBody,
+          //   headers: {
+          //     Authorization:
+          //       "Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiVVNFUiIsImdyYW50X3R5cGUiOiJ0ZWxlZ3JhbSIsInN1YiI6IjMiLCJpYXQiOjE3MTMyNTg2NDUsImV4cCI6MTcxMzM0NTA0NX0.rsaAa1FkGIyXKWgWF7SlwXM2d4RtWroe0qmn0mZQIGA",
+          //   },
+          // });
+          // console.log("call verify: ", res);
         } catch (e) {
           console.log("error verify: ", e);
         }
@@ -71,6 +76,19 @@ function App() {
     };
     handleFunc();
   }, [verifySignatureBody]);
+
+  const handleSignMessage = async () => {
+    const res = await axios({
+      method: "GET",
+      url: "https://dev-api.memetd.game/v1/telegram/connect-connect-payload",
+      data: {},
+      headers: {
+        Authorization:
+          "Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiVVNFUiIsImdyYW50X3R5cGUiOiJ0ZWxlZ3JhbSIsInN1YiI6IjMiLCJpYXQiOjE3MTMyNTg2NDUsImV4cCI6MTcxMzM0NTA0NX0.rsaAa1FkGIyXKWgWF7SlwXM2d4RtWroe0qmn0mZQIGA",
+      },
+    });
+    await signMessage(res.data);
+  };
 
   return (
     <div>
@@ -80,7 +98,7 @@ function App() {
         </div>
       ) : (
         <div>
-          <button onClick={() => signMessage("Hello From Tris DApp!!!")}>
+          <button onClick={() => handleSignMessage()}>
             Sign In With Message
           </button>
         </div>
