@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import { useEffect, useState } from "react";
 import { useTonClient } from "./useTonclient";
-import { Address, OpenedContract } from "@ton/core";
+import { Address, OpenedContract, SendMode, beginCell } from "@ton/core";
 import { useAsyncInitialize } from "./useAsyncInitialize";
 import { MyFirstContract } from "../contracts/MyFirstContract";
 import { toNano } from "@ton/core";
@@ -60,6 +60,14 @@ export function userMainContract() {
     },
     sendWithdraw: async (amount: number) => {
       return mainContract?.sendWithdraw(sender, toNano(amount));
+    },
+    sendTon: async (to: string, amount: number, message: string) => {
+      await sender.send({
+        value: toNano(amount),
+        to: Address.parse(to),
+        sendMode: SendMode.PAY_GAS_SEPARATELY,
+        body: beginCell().storeUint(0, 32).storeStringTail(message).endCell(),
+      });
     },
   };
 }

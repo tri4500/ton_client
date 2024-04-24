@@ -1,5 +1,5 @@
 {
-  "url": "http://localhost:3000",
+  "url": "http://localhost:5173",
   "name": "MemeTD Game",
   "iconUrl": "https://raw.githubusercontent.com/tri4500/ton_client/blob/main/public/manifest-icon.jpg"
 }
