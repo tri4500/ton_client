@@ -6,7 +6,7 @@ import {
 import { Sender, SenderArguments } from "@ton/core";
 
 export interface VerifyTonProofRequest {
-  ton_proof: TonProofItemReplySuccess;
+  ton_proof: TonProofItemReplySuccess | null;
   address: string;
   state_init: string;
 }
